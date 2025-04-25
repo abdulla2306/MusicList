@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Musiqani Yangilash</h2>
+    <form action="{% url 'music_edit' pk=music.pk %}" method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="genre" class="form-label">Musiqa Janri</label>
+            <input type="text" class="form-control" id="music_genre" name="genre" value="{{ music.genre }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="text" class="form-label">Nomi</label>
+            <input type="text" class="form-control" id="text" name="text" value="{{ music.text }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="published_year" class="form-label">Nashr yili</label>
+            <input type="date" class="form-control" id="published_year" name="published_year" value="{{ music.published_year }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="author" class="form-label">Yozuvchi</label>
+            <select id="author" name="author" class="form-select" required>
+                <option value="">-- Avtorni tanlang --</option>
+                {% for author in authors %}
+                    <option value="{{ author.id }}" {% if author.id == music.author.id %}selected{% endif %}>{{ author.full_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Saqlash</button>
+    </form>
+</div>
+{% endblock %}
+

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2>Avtorni tahrirlash: <span class="text-primary">{{ author.full_name }}</span></h2>
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        {{ form.as_p }}
+      </div>
+
+      <button type="submit" class="btn btn-success">Saqlash</button>
+    </form>
+
+    <div class="mt-3">
+      <a href="{% url 'author_list' %}" class="btn btn-secondary">Ro'yxatga qaytish</a>
+    </div>
+  </div>
+{% endblock %}

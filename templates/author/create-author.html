@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-success text-white">
+            <h4 class="mb-0">➕ Yangi Muallif Qo‘shish</h4>
+        </div>
+        <div class="card-body">
+            <form action="{% url 'author_create' %}" method="POST">
+                {% csrf_token %}
+
+                <!-- Muallifning To'liq Ismi -->
+                <div class="mb-3">
+                    <label for="full_name" class="form-label">👤 To'liq Ism</label>
+                    <input type="text" id="full_name" name="full_name" class="form-control" value="{{ form.full_name.value }}" required>
+                    {% if form.full_name.errors %}
+                        <div class="text-danger mt-2">
+                            {% for error in form.full_name.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Muallifning Tug'ilgan Sanasi -->
+                <div class="mb-3">
+                    <label for="birthday" class="form-label">🎂 Tug‘ilgan Sana</label>
+                    <input type="date" id="birthday" name="birthday" class="form-control" value="{{ form.birthday.value }}" required>
+                    {% if form.birthday.errors %}
+                        <div class="text-danger mt-2">
+                            {% for error in form.birthday.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Muallifning Davlati -->
+                <div class="mb-3">
+                    <label for="country" class="form-label">🌍 Davlat</label>
+                    <input type="text" id="country" name="country" class="form-control" value="{{ form.country.value }}" required>
+                    {% if form.country.errors %}
+                        <div class="text-danger mt-2">
+                            {% for error in form.country.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Saqlash va Ortga qaytish tugmalari -->
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-success">💾 Saqlash</button>
+                    <a href="{% url 'author_list' %}" class="btn btn-secondary ms-2">⬅️ Ortga</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

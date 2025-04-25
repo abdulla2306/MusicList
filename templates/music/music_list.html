@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="display-6">🎵 Musiqa Ro'yxati</h1>
+        <a href="{% url 'music_create' %}" class="btn btn-success">+ Yangi qo‘shiq qo‘shish</a>
+    </div>
+
+    <table class="table table-hover table-bordered shadow-sm rounded">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nomi</th>
+                <th scope="col">Teksti</th>
+                <th scope="col">Yaratilgan yili</th>
+                <th scope="col">Amallar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for music in musics %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ music.genre }}</td>
+                <td>{{ music.text|truncatechars:50 }}</td>
+                <td>{{ music.published_year }}</td>
+                <td>
+                    <a class="btn btn-sm btn-primary" href="{% url 'music_detail' music.pk %}">Batafsil</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center text-muted">Hech qanday musiqa mavjud emas.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'author_list' %}" class="btn btn-outline-secondary">📚 Mualliflar ro'yxati</a>
+</div>
+{% endblock %}
+

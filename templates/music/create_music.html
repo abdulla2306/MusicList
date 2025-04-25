@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-success text-white">
+            <h4 class="mb-0">{% if music %}🎵 Musiqani tahrirlash{% else %}➕ Yangi musiqa qo‘shish{% endif %}</h4>
+        </div>
+        <div class="card-body">
+            <form action="{% if music %}{% url 'music_edit' music.pk %}{% else %}{% url 'music_create' %}{% endif %}" method="POST">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="genre" class="form-label">🎼 Musiqa Janri</label>
+                    <input type="text" id="genre" name="genre" class="form-control" value="{{ music.genre }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="text" class="form-label">📝 Nomi</label>
+                    <input type="text" id="text" name="text" class="form-control" value="{{ music.text }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="published_year" class="form-label">📅 Nashr yili</label>
+                    <input type="date" id="published_year" name="published_year" class="form-control" value="{{ music.published_year|date:'Y-m-d' }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="author" class="form-label">✍️ Yozuvchi</label>
+                    <select id="author" name="author" class="form-select" required>
+                        <option value="">-- Avtorni tanlang --</option>
+                        {% for author in authors %}
+                            <option value="{{ author.id }}" {% if author.id == music.author.id %}selected{% endif %}>{{ author.full_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">💾 Saqlash</button>
+                <a href="{% url 'music_list' %}" class="btn btn-secondary ms-2">⬅️ Ortga</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
