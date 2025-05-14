@@ -7,7 +7,8 @@
             <h4 class="mb-0">{% if music %}🎵 Musiqani tahrirlash{% else %}➕ Yangi musiqa qo‘shish{% endif %}</h4>
         </div>
         <div class="card-body">
-            <form action="{% if music %}{% url 'music_edit' music.pk %}{% else %}{% url 'music_create' %}{% endif %}" method="POST">
+            <form action="{% if music %}{% url 'music_edit' music.pk %}{% else %}{% url 'music_create' %}{% endif %}"
+                  method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <div class="mb-3">
@@ -22,7 +23,8 @@
 
                 <div class="mb-3">
                     <label for="published_year" class="form-label">📅 Nashr yili</label>
-                    <input type="date" id="published_year" name="published_year" class="form-control" value="{{ music.published_year|date:'Y-m-d' }}" required>
+                    <input type="date" id="published_year" name="published_year" class="form-control"
+                           value="{{ music.published_year|date:'Y-m-d' }}" required>
                 </div>
 
                 <div class="mb-3">
@@ -30,9 +32,19 @@
                     <select id="author" name="author" class="form-select" required>
                         <option value="">-- Avtorni tanlang --</option>
                         {% for author in authors %}
-                            <option value="{{ author.id }}" {% if author.id == music.author.id %}selected{% endif %}>{{ author.full_name }}</option>
+                            <option value="{{ author.id }}" {% if music and author.id == music.author.id %}selected{% endif %}>
+                                {{ author.full_name }}
+                            </option>
                         {% endfor %}
                     </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="audio" class="form-label">🎧 Musiqa fayli (audio)</label>
+                    <input type="file" id="audio" name="audio" class="form-control">
+                    {% if music and music.audio %}
+                        <p class="mt-2">Joriy fayl: <audio controls src="{{ music.audio.url }}"></audio></p>
+                    {% endif %}
                 </div>
 
                 <button type="submit" class="btn btn-primary">💾 Saqlash</button>
@@ -42,3 +54,4 @@
     </div>
 </div>
 {% endblock %}
+

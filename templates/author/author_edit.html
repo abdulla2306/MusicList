@@ -1,21 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="container mt-5">
-    <h2>Avtorni tahrirlash: <span class="text-primary">{{ author.full_name }}</span></h2>
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-success text-white">
+            <h4 class="mb-0">✍️ Muallifni Tahrirlash</h4>
+        </div>
+        <div class="card-body">
+            <form action="{% url 'author_edit' author.pk %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
 
-    <form method="POST">
-      {% csrf_token %}
+                <div class="mb-3">
+                    <label for="full_name" class="form-label">👤 To‘liq ism</label>
+                    <input type="text" class="form-control" id="full_name" name="full_name" value="{{ author.full_name }}" required>
+                </div>
 
-      <div class="mb-3">
-        {{ form.as_p }}
-      </div>
+                <div class="mb-3">
+                    <label for="birthday" class="form-label">🎂 Tug‘ilgan sana</label>
+                    <input type="date" class="form-control" id="birthday" name="birthday" value="{{ author.birthday|date:'Y-m-d' }}" required>
+                </div>
 
-      <button type="submit" class="btn btn-success">Saqlash</button>
-    </form>
+                <div class="mb-3">
+                    <label for="country" class="form-label">🌍 Davlat</label>
+                    <input type="text" class="form-control" id="country" name="country" value="{{ author.country }}" required>
+                </div>
 
-    <div class="mt-3">
-      <a href="{% url 'author_list' %}" class="btn btn-secondary">Ro'yxatga qaytish</a>
+                <div class="mb-3">
+                    <label for="image" class="form-label">📷 Rasm</label>
+                    <input type="file" class="form-control" id="image" name="image">
+                    {% if author.image %}
+                        <small class="form-text text-muted mt-2">
+                            Joriy rasm: <img src="{{ author.image.url }}" alt="Muallif rasmi" width="100" class="img-thumbnail">
+                        </small>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="btn btn-primary">💾 Saqlash</button>
+                <a href="{% url 'author_list' %}" class="btn btn-secondary ms-2">⬅️ Ortga</a>
+            </form>
+        </div>
     </div>
-  </div>
+</div>
 {% endblock %}

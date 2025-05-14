@@ -11,8 +11,8 @@ urlpatterns = [
     path('delete/<int:pk>/', delete_music, name='music_delete'),
 
     # Author URLs
-    path('author/', create_author, name='author_create'),
     path('Avtorlar/', get_authors, name='author_list'),
+    path('author/creat/', create_author, name='author_create'),
     path('author/detail/<int:pk>/', author_detail, name='author_detail'),
     path('author/edit/<int:pk>/', edit_author, name='author_edit'),
     path('author/delete/<int:pk>/', delete_author, name='author_delete'),

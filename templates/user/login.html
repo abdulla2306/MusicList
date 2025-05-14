@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Login</h2>
+<form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+
+{% if form.errors %}
+  <p class="text-danger">Login yoki parol noto‘g‘ri!</p>
+{% endif %}
+
+<p>Ro‘yxatdan o‘tmaganmisiz? <a href="{% url 'register' %}">Ro‘yxatdan o‘tish</a></p>
+{% endblock %}

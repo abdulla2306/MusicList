@@ -10,29 +10,61 @@
             <table class="table table-bordered table-hover">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Ma'lumot</th>
+                        <th scope="col">Nomi</th>
                         <th scope="col">Nashr yili</th>
                         <th scope="col">Yozuvchi</th>
+                        <th scope="col">Rasm</th>
+                        <th scope="col">Yuklab olish</th>
+
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">{{ music.id }}</th>
                         <td>{{ music.text }}</td>
                         <td>{{ music.published_year }}</td>
                         <td>{{ music.author }}</td>
+                        {% if music.author.image %}
+                        <td>
+                            <img src="{{ music.author.image.url }}" width="100" alt="Rasm" class="mb-2"><br>
+                        </td>
+                        {% else %}
+                        <td>
+                            <span>Rasm mavjud emas</span>
+                        </td>
+                        {% endif %}
+                        <td>
+                         {% if music.audio %}
+                             <a href="{{ music.audio.url }}" download class="btn btn-outline-primary btn-sm">
+                                 📥 Yuklab olish
+                             </a>
+                         {% else %}
+                             <span>Audio mavjud emas</span>
+                            {% endif %}
+                         </td>
+
                     </tr>
                 </tbody>
             </table>
 
+            {% if music.audio %}
+            <div class="mt-4">
+                <h5>🎧 Tinglang:</h5>
+                <audio controls class="w-100">
+                    <source src="{{ music.audio.url }}" type="audio/mpeg">
+                    Brauzeringiz audio pleerni qo‘llab-quvvatlamaydi.
+                </audio>
+            </div>
+            {% else %}
+            <p class="text-muted mt-4">Audio fayl mavjud emas.</p>
+            {% endif %}
+
             <div class="d-flex justify-content-between gap-3 mt-4">
-                <!-- Yangilash va O'chirish tugmalari bir qatorda -->
+                {% if perms.music.add_music %}
                 <a href="{% url 'music_edit' music.pk %}" class="btn btn-warning btn-lg">Yangilash</a>
                 <a href="{% url 'music_delete' music.pk %}" class="btn btn-danger btn-lg">O'chirish</a>
+                {% endif %}
             </div>
 
-            <!-- Bosh sahifaga qaytish tugmasi ekranning chap tomonida pastda -->
             <div class="mt-3">
                 <a href="{% url 'music_list' %}" class="btn btn-secondary btn-lg w-100">Bosh sahifaga qaytish</a>
             </div>
@@ -40,5 +72,3 @@
     </div>
 </div>
 {% endblock %}
-
-
