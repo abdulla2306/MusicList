@@ -33,8 +33,8 @@ class WorkeerMiddleware:
 
     def __call__(self, request):
         now = datetime.datetime.now().time()
-        start_time = datetime.time(0, 0, 0)
-        finish_time = datetime.time(24, 0, 0)
+        start_time = datetime.time(18, 0, 0)
+        finish_time = datetime.time(8, 0, 0)
 
         if not (start_time <= now <= finish_time):
             return HttpResponseForbidden("sayt ishlamaydi")
