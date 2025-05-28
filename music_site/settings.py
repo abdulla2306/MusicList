@@ -193,7 +193,7 @@ from decouple import config
 GOOGLE_CLIENT_ID = config('GOOGLE_CLIENT_ID')
 GOOGLE_CLIENT_SECRET = config('GOOGLE_CLIENT_SECRET')
 
-GOOGLE_REDIRECT_URI = "http://127.0.0.1:8000/accounts/google/login/callback/"
+GOOGLE_REDIRECT_URI = "https://music-site-snaq.onrender.com/accounts/google/login/callback/"
 
 GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/auth"
 
