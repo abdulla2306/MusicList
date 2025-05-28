@@ -9,10 +9,10 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-import os
+
 from pathlib import Path
 
-from django.conf.global_settings import STATICFILES_DIRS
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,10 +27,14 @@ SECRET_KEY = 'django-insecure-*%^_^q4(m2-yc7&u8t5i1odgg*9tq2$f^+$7inzp2uah)3-2x=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.onrender.com']
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+# ALLOWED_HOSTS = ['.onrender.com']
+# RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+# if RENDER_EXTERNAL_HOSTNAME:
+#     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
+
+import dj_database_url
+
 
 
 # Application definition
@@ -99,15 +103,23 @@ WSGI_APPLICATION = 'music_site.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'music_baza',
+#         'USER': 'postgres',
+#         'PASSWORD': '2306',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'music_baza',
-        'USER': 'postgres',
-        'PASSWORD': '2306',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.parse(
+        'postgresql://neondb_owner:npg_BxJlA4R8PCyh@ep-white-mode-a9yy9y05-pooler.gwc.azure.neon.tech/neondb?sslmode=require',
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
 # Password validation
