@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'music',
     'django_extensions',
     'user',
+    #3th
+    'captcha'
 
 ]
 
@@ -54,6 +56,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'user.middleware.LogIPMiddleware',
+    'user.middleware.WorkeerMiddleware',
+    'user.middleware.LogUserMiddleware',
+    'user.middleware.RateLimitMiddleware',
 ]
 
 ROOT_URLCONF = 'music_site.urls'
@@ -93,7 +99,7 @@ WSGI_APPLICATION = 'music_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'baza',
+        'NAME': 'music_baza',
         'USER': 'postgres',
         'PASSWORD': '2306',
         'HOST': 'localhost',
@@ -152,5 +158,31 @@ LOGIN_REDIRECT_URL = 'music_list'
 LOGOUT_REDIRECT_URL = 'login'
 
 AUTH_USER_MODEL = 'user.CustomUser'
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_HOST = "smtp.gmail.com"
+
+EMAIL_PORT = 587
+
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = "abdullagulomjonov2306@gmail.com"
+
+EMAIL_HOST_PASSWORD = "gedg iybp zhom yqrt"
+
+from decouple import config
+
+GOOGLE_CLIENT_ID = config('GOOGLE_CLIENT_ID')
+GOOGLE_CLIENT_SECRET = config('GOOGLE_CLIENT_SECRET')
+
+GOOGLE_REDIRECT_URI = "http://127.0.0.1:8000/accounts/google/login/callback/"
+
+GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/auth"
+
+GOOGLE_USER_INFO_URL = "https://www.googleapis.com/oauth2/v1/userinfo"
+
+GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token"
 
 

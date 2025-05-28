@@ -1,6 +1,8 @@
 from django.urls import path
+
+from music import views
 from music.views import get_music, create_music, edit_music, delete_music, music_detail, create_author, get_authors, \
-    author_detail, edit_author, delete_author
+    author_detail, edit_author, delete_author,  send_email_view
 
 urlpatterns = [
     # Music URLs
@@ -16,5 +18,11 @@ urlpatterns = [
     path('author/detail/<int:pk>/', author_detail, name='author_detail'),
     path('author/edit/<int:pk>/', edit_author, name='author_edit'),
     path('author/delete/<int:pk>/', delete_author, name='author_delete'),
+
+    # send_email
+    path('send/', send_email_view, name='email_content'),
+
+    # to_excel
+    path('excel/', views.export_to_xslx, name='excel'),
 
 ]

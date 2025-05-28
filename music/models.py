@@ -44,4 +44,10 @@ class Music(BaseModel):
         return f"{self.genre} - {self.published_year}"
 
 
+class EmailNotification(models.Model):
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.subject

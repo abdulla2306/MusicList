@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h3>Parolni tiklash</h3>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="login" class="form-label">Login</label>
+            <input type="text" name="login" id="login" class="form-control" placeholder="Foydalanuvchi loginini kiriting" required>
+        </div>
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        <button type="submit" class="btn btn-primary">Kod yuborish</button>
+    </form>
+</div>
+{% endblock %}

@@ -3,19 +3,20 @@
 {% block content %}
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="display-6">🎵 Musiqalar Ro'yxati</h1>
+        <h1 class="display-6" class="bg-primary text-white" >🎵 Musiqalar Ro'yxati</h1>
         <a href="{% url 'music_create' %}" class="btn btn-success">+ Yangi qo‘shiq qo‘shish</a>
     </div>
 
-    <table class="table table-hover table-bordered shadow-sm rounded">
-        <thead class="table-dark">
+    <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+        <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Janri</th>
-                <th scope="col">Nomi</th>
-                <th scope="col">Yaratilgan yili</th>
-                <th scope="col">Audio</th>
-                <th scope="col">Amallar</th>
+                <th class="bg-primary text-white" scope="col">#</th>
+                <th class="bg-success text-white" scope="col">Janri</th>
+                <th class="bg-warning text-white" scope="col">Nomi</th>
+                <th class="bg-danger text-white" scope="col">Yaratilgan yili</th>
+                <th class="bg-info text-white" scope="col">Audio</th>
+                <th class="bg-secondary text-white" scope="col">Ma'lumotlar</th>
             </tr>
         </thead>
         <tbody>
@@ -36,7 +37,7 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a class="btn btn-sm btn-primary" href="{% url 'music_detail' music.pk %}">Batafsil</a>
+                    <a class="btn btn-sm btn-outline-primary" href="{% url 'music_detail' music.pk %}">🔍 Batafsil</a>
                 </td>
             </tr>
             {% empty %}
@@ -48,6 +49,9 @@
     </table>
 
     <a href="{% url 'author_list' %}" class="btn btn-outline-secondary">📚 Mualliflar ro'yxati</a>
+    <a href="{% url 'excel' %}" class="btn btn-outline-secondary">📚 Excel</a>
+
 </div>
+
 {% include 'pagination.html' with page_obj=musics %}
 {% endblock %}

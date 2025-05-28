@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5 text-center">
+    <div class="alert alert-warning">
+        <h4>Kodning amal qilish muddati tugagan ⏳</h4>
+        <p>Iltimos, qayta urining va yangi kod so‘rashingiz kerak.</p>
+        <a href="{% url 'forgot-password' %}" class="btn btn-outline-primary mt-3">Qayta urinish</a>
+    </div>
+</div>
+{% endblock %}

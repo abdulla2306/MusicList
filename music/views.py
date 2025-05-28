@@ -1,12 +1,18 @@
-from IPython.core.release import author
+import openpyxl
+from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.models import User
+from django.core.mail import EmailMultiAlternatives
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.template.loader import render_to_string
 from django.utils import timezone
-from django_extensions.management.commands.export_emails import full_name
 
-from .forms import MusicForm, AuthorForm
+from user.models import CustomUser
+from .forms import MusicForm, AuthorForm, EmailNotificationForm
 from .models import Music, Author
 
 
@@ -140,3 +146,53 @@ def delete_author(request, pk):
         return redirect('author_list')
 
     return render(request, 'author/author_delete.html', {'author': author})
+
+@permission_required('music.add_emailnotification', raise_exception=True)
+def send_email_view(request):
+    User = get_user_model()
+
+    if request.method == 'POST':
+        form = EmailNotificationForm(request.POST)
+        if form.is_valid():
+            notification = form.save()
+            users = User.objects.filter(is_active=True).exclude(email='')
+
+            for user in users:
+                email = EmailMultiAlternatives(
+                    subject=notification.subject,
+                    body=notification.message,
+                    from_email="abdullagulomjonov2306@gmail.com",
+                    to=[user.email]
+                )
+                email.send()
+
+            messages.success(request, f"{users.count()} foydalanuvchiga xabar yuborildi.")
+            return redirect('email_content')
+    else:
+        form = EmailNotificationForm()
+
+    return render(request, 'music/email_content.html', {'form': form})
+
+
+
+def export_to_xslx(request):
+    workbook=openpyxl.Workbook()
+    sheet=workbook.active
+    sheet.title="Music"
+    sheet.append([
+        'genre',
+        'text',
+        'author',
+    ])
+    musics=Music.objects.all()
+    for music in musics:
+        sheet.append([
+            music.genre,
+            music.text,
+            music.author.full_name,
+        ])
+    response=HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition']='attachment;filename="musics.xlsx"'
+    workbook.save(response)
+    return response
+

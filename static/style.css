@@ -1,59 +1,69 @@
-/* Navbarga gradient fon va soyalar */
 .navbar {
-  background: linear-gradient(135deg, #4e54c8, #8f94fb);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 1);
 }
 
-/* Navbar brend rangini oq qilish */
 .navbar .navbar-brand {
-  color: #ffffff;
-  font-weight: bold;
-  font-size: 1.5rem;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.5rem;
 }
 
-/* Navbar havolalar (linklar) ranglari */
 .navbar .nav-link {
-  color: #f0f0f0;
-  transition: color 0.3s ease;
+    color: #ffffff;
+    transition: color 0.3s ease;
 }
 
 .navbar .nav-link:hover {
-  color: #ffd700;
+    color: #ffd700;
 }
 
-/* Dropdown menyu fon va linklar */
-.navbar .dropdown-menu {
-  background-color: #4e54c8;
-  border: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.navbar .dropdown-item {
-  color: #ffffff;
-}
-
-.navbar .dropdown-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #ffd700;
-}
-
-/* Qidiruv input dizayni */
 .navbar .form-control {
-  border-radius: 20px;
-  border: none;
-  padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: none;
+    padding: 0.5rem 1rem;
 }
 
-/* Qidiruv tugmasi */
 .navbar .btn-outline-success {
-  color: #fff;
-  border-color: #fff;
-  border-radius: 20px;
-  transition: background-color 0.3s ease;
+    color: #4e54c8;
+    border-color: #8f94fb;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
 }
 
 .navbar .btn-outline-success:hover {
-  background-color: #ffd700;
-  color: #333;
-  border-color: #ffd700;
+    background-color: #4e54c8;
+    color: #333;
+    border-color: #8f94fb;
+}
+
+body {
+    background-image: url("/static/images/background_new.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    min-height: 100vh;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: -1;
+}
+
+@media (max-width: 768px) {
+    body {
+        background-position: top center;
+    }
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    z-index: 100;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
 }

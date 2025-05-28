@@ -12,5 +12,7 @@
   <p class="text-danger">Login yoki parol noto‘g‘ri!</p>
 {% endif %}
 
+<p>Parolni tiklash? <a href="{% url 'send_reset_code' %}">Parolni tiklash</a></p>
 <p>Ro‘yxatdan o‘tmaganmisiz? <a href="{% url 'register' %}">Ro‘yxatdan o‘tish</a></p>
+<p>Google acount orqali kirish? <a href="{% url 'google_login'  %}">Google</a></p>
 {% endblock %}

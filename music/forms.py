@@ -3,7 +3,7 @@ from datetime import date
 from django import forms
 
 
-from music.models import Author
+from music.models import Author, EmailNotification
 
 
 class AuthorForm(forms.ModelForm):
@@ -35,5 +35,12 @@ class MusicForm(forms.ModelForm):
             raise forms.ValidationError("Nashr yili hozirgi yildan katta bo'lishi mumkin emas.")
         return published_year
 
-
+class EmailNotificationForm(forms.ModelForm):
+    class Meta:
+        model = EmailNotification
+        fields = ['subject', 'message']
+        widgets = {
+            'subject': forms.TextInput(attrs={'class': 'form-control'}),
+            'message': forms.Textarea(attrs={'class': 'form-control'}),
+        }
 
