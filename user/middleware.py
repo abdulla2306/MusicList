@@ -27,21 +27,6 @@ class LogUserMiddleware:
         return response
 
 
-class WorkeerMiddleware:
-    def __init__(self, get_response):
-        self.get_response = get_response
-
-    def __call__(self, request):
-        now = datetime.datetime.now().time()
-        start_time = datetime.time(18, 0, 0)  # 18:00
-        finish_time = datetime.time(8, 0, 0)  # 08:00 (ertalab)
-
-        # Ishlamaydigan vaqt: 18:00 dan ertalab 08:00 gacha
-        if start_time <= now or now <= finish_time:
-            return HttpResponseForbidden("Sayt ish vaqtidan tashqari yopiq.")
-
-        response = self.get_response(request)
-        return response
 
 import time
 from django.http import HttpResponseRedirect
