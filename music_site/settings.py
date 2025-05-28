@@ -87,6 +87,8 @@ TEMPLATES = [
     },
 ]
 
+ALLOWED_HOSTS = ['music-site-snaq.onrender.com']
+
 
 WSGI_APPLICATION = 'music_site.wsgi.application'
 
