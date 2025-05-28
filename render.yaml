@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: Music_Site
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn music_site.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: music_site.settings
