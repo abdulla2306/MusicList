@@ -33,8 +33,8 @@ class WorkeerMiddleware:
 
     def __call__(self, request):
         now = datetime.datetime.now().time()
-        start_time = datetime.time(8, 0, 0)
-        finish_time = datetime.time(18, 0, 0)
+        start_time = datetime.time(0, 0, 0)
+        finish_time = datetime.time(24, 0, 0)
 
         if not (start_time <= now <= finish_time):
             return HttpResponseForbidden("sayt ishlamaydi")
@@ -48,7 +48,7 @@ from django.http import HttpResponseRedirect
 class RateLimitMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
-        self.rate_limit = 5
+        self.rate_limit = 100
         self.time_window = 5
         self.last_requests = {}
 
