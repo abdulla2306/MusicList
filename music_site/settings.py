@@ -64,7 +64,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'user.middleware.LogIPMiddleware',
-    'user.middleware.WorkeerMiddleware',
     'user.middleware.LogUserMiddleware',
     'user.middleware.RateLimitMiddleware',
 ]
