@@ -27,6 +27,23 @@ class LogUserMiddleware:
         return response
 
 
+<<<<<<< HEAD
+=======
+# class WorkeerMiddleware:
+#     def __init__(self, get_response):
+#         self.get_response = get_response
+#
+#     def __call__(self, request):
+#         now = datetime.datetime.now().time()
+#         start_time = datetime.time(8, 0, 0)
+#         finish_time = datetime.time(18, 0, 0)
+#
+#         if not (start_time <= now <= finish_time):
+#             return HttpResponseForbidden("sayt ishlamaydi")
+#
+#         response = self.get_response(request)
+#         return response
+>>>>>>> 0357d38 (Navbar)
 
 import time
 from django.http import HttpResponseRedirect

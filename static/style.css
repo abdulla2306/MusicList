@@ -1,6 +1,10 @@
+/* === Navbar Styling === */
 .navbar {
     background: linear-gradient(135deg, #4e54c8, #8f94fb);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .navbar .navbar-brand {
@@ -33,10 +37,11 @@
 
 .navbar .btn-outline-success:hover {
     background-color: #4e54c8;
-    color: #333;
+    color: #fff;
     border-color: #8f94fb;
 }
 
+/* === Body Background and Overlay === */
 body {
     background-image: url("/static/images/background_new.jpg");
     background-size: cover;
@@ -44,6 +49,8 @@ body {
     background-attachment: fixed;
     background-position: center center;
     min-height: 100vh;
+    padding-bottom: 80px; /* Footer uchun joy */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body::before {
@@ -54,16 +61,65 @@ body::before {
     z-index: -1;
 }
 
-@media (max-width: 768px) {
-    body {
-        background-position: top center;
-    }
+/* === Cards and Lists === */
+.card {
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* === Footer === */
 footer {
     position: fixed;
     bottom: 0;
     width: 100%;
     background-color: black;
     z-index: 100;
+    color: white;
+    text-align: center;
+    padding: 10px;
     box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* === Global Effects === */
+* {
+    scroll-behavior: smooth;
+    transition: all 0.3s ease-in-out;
+}
+
+/* === Responsive (Mobil moslashuv) === */
+@media (max-width: 768px) {
+    .navbar .nav-link {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .navbar .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .navbar .form-control,
+    .navbar .btn-outline-success {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    body {
+        background-position: top center;
+    }
+
+    footer {
+        font-size: 14px;
+        padding: 6px;
+    }
 }
