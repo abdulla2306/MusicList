@@ -64,13 +64,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'user.middleware.LogIPMiddleware',
-<<<<<<< HEAD
-=======
+
     # 'user.middleware.WorkeerMiddleware',
->>>>>>> 0357d38 (Navbar)
+
     'user.middleware.LogUserMiddleware',
     'user.middleware.RateLimitMiddleware',
 ]
+
 
 ROOT_URLCONF = 'music_site.urls'
 
