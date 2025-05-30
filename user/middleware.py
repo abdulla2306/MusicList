@@ -27,8 +27,7 @@ class LogUserMiddleware:
         return response
 
 
-<<<<<<< HEAD
-=======
+
 # class WorkeerMiddleware:
 #     def __init__(self, get_response):
 #         self.get_response = get_response
@@ -43,7 +42,7 @@ class LogUserMiddleware:
 #
 #         response = self.get_response(request)
 #         return response
->>>>>>> 0357d38 (Navbar)
+
 
 import time
 from django.http import HttpResponseRedirect

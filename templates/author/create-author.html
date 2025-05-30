@@ -48,18 +48,27 @@
                     {% endif %}
                 </div>
 
-                <!-- Muallifning Rasmi -->
-                <div class="mb-3">
-                    <label for="image" class="form-label">📸 Rasm</label>
-                    <input type="file" id="image" name="image" class="form-control">
-                    {% if form.image.errors %}
-                        <div class="text-danger mt-2">
-                            {% for error in form.image.errors %}
-                                <p>{{ error }}</p>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                </div>
+               <!-- Muallifning Rasmi -->
+<div class="mb-3">
+    <label for="image" class="form-label">📸 Rasm</label>
+    <input type="file" id="image" name="image" class="form-control">
+
+    {% if form.image.errors %}
+        <div class="text-danger mt-2">
+            {% for error in form.image.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if form.instance.image %}
+        <small class="form-text text-muted mt-2">
+            Yuklangan rasm:
+            <img src="{{ form.instance.image.url }}" alt="Muallif rasmi" width="100" class="img-thumbnail mt-2">
+        </small>
+    {% endif %}
+</div>
+
 
                 <!-- Saqlash va Ortga qaytish tugmalari -->
                 <div class="text-center mt-4">

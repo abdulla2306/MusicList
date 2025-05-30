@@ -26,8 +26,12 @@ SECRET_KEY = 'django-insecure-*%^_^q4(m2-yc7&u8t5i1odgg*9tq2$f^+$7inzp2uah)3-2x=
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ALLOWED_HOSTS = ['music-site-snaq.onrender.com']
 
-# ALLOWED_HOSTS = ['.onrender.com']
+
+WSGI_APPLICATION = 'music_site.wsgi.application'
+
+# ALLOWED_HOSTS = []
 # RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 # if RENDER_EXTERNAL_HOSTNAME:
 #     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
@@ -46,7 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-#     local
+  #  local
     'music',
     'django_extensions',
     'user',
@@ -90,10 +94,6 @@ TEMPLATES = [
     },
 ]
 
-ALLOWED_HOSTS = ['music-site-snaq.onrender.com']
-
-
-WSGI_APPLICATION = 'music_site.wsgi.application'
 
 
 
@@ -113,7 +113,7 @@ WSGI_APPLICATION = 'music_site.wsgi.application'
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': 'music_baza',
 #         'USER': 'postgres',
-#         'PASSWORD': '2306',
+#         'PASSWORD': '',
 #         'HOST': 'localhost',
 #         'PORT': '5432',
 #     }
@@ -164,8 +164,17 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static',]
 
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # .env faylni o‘qiydi
+
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Default primary key field type
@@ -192,10 +201,15 @@ EMAIL_HOST_USER = "abdullagulomjonov2306@gmail.com"
 
 EMAIL_HOST_PASSWORD = "gedg iybp zhom yqrt"
 
-from decouple import config
+import os
+from dotenv import load_dotenv
 
-GOOGLE_CLIENT_ID = config('GOOGLE_CLIENT_ID')
-GOOGLE_CLIENT_SECRET = config('GOOGLE_CLIENT_SECRET')
+# .env faylni loyihaning ildizidan yuklash
+load_dotenv()
+
+GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
+GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
+
 
 GOOGLE_REDIRECT_URI = "https://music-site-snaq.onrender.com/accounts/google/login/callback/"
 

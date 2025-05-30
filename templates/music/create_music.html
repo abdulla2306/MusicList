@@ -39,13 +39,28 @@
                     </select>
                 </div>
 
-                <div class="mb-3">
-                    <label for="audio" class="form-label">🎧 Musiqa fayli (audio)</label>
-                    <input type="file" id="audio" name="audio" class="form-control">
-                    {% if music and music.audio %}
-                        <p class="mt-2">Joriy fayl: <audio controls src="{{ music.audio.url }}"></audio></p>
-                    {% endif %}
-                </div>
+              <div class="mb-3">
+    <label for="audio" class="form-label">🎧 Musiqa fayli (audio)</label>
+    <input type="file" id="audio" name="audio" class="form-control">
+
+    {% if form.audio.errors %}
+        <div class="text-danger mt-2">
+            {% for error in form.audio.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if form.instance.audio %}
+        <div class="mt-3">
+            <p class="mb-1">Joriy audio:</p>
+            <audio controls style="width: 100%;">
+                <source src="{{ form.instance.audio.url }}" type="audio/mpeg">
+                Brauzeringiz audio pleerni qo‘llab-quvvatlamaydi.
+            </audio>
+        </div>
+    {% endif %}
+</div>
 
                 <button type="submit" class="btn btn-primary">💾 Saqlash</button>
                 <a href="{% url 'music_list' %}" class="btn btn-secondary ms-2">⬅️ Ortga</a>

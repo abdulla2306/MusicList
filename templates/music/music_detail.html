@@ -23,24 +23,24 @@
                         <td>{{ music.text }}</td>
                         <td>{{ music.published_year }}</td>
                         <td>{{ music.author }}</td>
-                        {% if music.author.image %}
                         <td>
-                            <img src="{{ music.author.image.url }}" width="100" alt="Rasm" class="mb-2"><br>
-                        </td>
-                        {% else %}
-                        <td>
-                            <span>Rasm mavjud emas</span>
-                        </td>
-                        {% endif %}
-                        <td>
-                         {% if music.audio %}
-                             <a href="{{ music.audio.url }}" download class="btn btn-outline-primary btn-sm">
-                                 📥 Yuklab olish
-                             </a>
-                         {% else %}
-                             <span>Audio mavjud emas</span>
-                            {% endif %}
-                         </td>
+    {% if music.author.image_url %}
+        <img src="{{ music.author.image_url }}" width="100" alt="Rasm" class="mb-2"><br>
+    {% else %}
+        <span>Rasm mavjud emas</span>
+    {% endif %}
+</td>
+
+<td>
+    {% if music.audio_url %}
+        <a href="{{ music.audio_url }}" download class="btn btn-outline-primary btn-sm">
+            📥 Yuklab olish
+        </a>
+    {% else %}
+        <span>Audio mavjud emas</span>
+    {% endif %}
+</td>
+
 
                     </tr>
                 </tbody>

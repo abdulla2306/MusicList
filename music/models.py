@@ -23,8 +23,7 @@ class Author(BaseModel):
     full_name = models.CharField(max_length=100,default='')
     birthday = models.DateField()
     country = models.CharField(max_length=100,default='')
-    image = models.ImageField(upload_to='author_images/', null=True, blank=True)
-
+    image =  models.URLField()
 
 
     def __str__(self):
@@ -36,7 +35,7 @@ class Music(BaseModel):
     text = models.TextField()
     published_year = models.DateField(null=True, blank=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, blank=True, null=True)
-    audio = models.FileField(upload_to='music_audios/', null=True, blank=True)
+    audio =  models.URLField()
 
 
 

@@ -31,15 +31,33 @@
             </select>
         </div>
 
-        <div class="mb-3">
-            <label for="audio" class="form-label">Audio fayl (agar o‘zgartirmoqchi bo‘lsangiz)</label>
-            <input type="file" class="form-control" id="audio" name="audio">
-            {% if music.audio %}
-                <small class="form-text text-muted">Joriy fayl:
-                    <a href="{{ music.audio.url }}" target="_blank">Yuklangan audio</a>
-                </small>
-            {% endif %}
+       <div class="mb-3">
+    <label for="audio" class="form-label">🎧 Audio fayl (agar o‘zgartirmoqchi bo‘lsangiz)</label>
+    <input type="file" class="form-control" id="audio" name="audio">
+
+    {% if form.audio.errors %}
+        <div class="text-danger mt-2">
+            {% for error in form.audio.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
         </div>
+    {% endif %}
+
+    {% if music.audio %}
+        <div class="mt-2">
+            <p class="mb-1">Joriy fayl:
+                <a href="{{ music.audio.url }}" class="text-decoration-underline" target="_blank">
+                    Yuklangan audio 🎵
+                </a>
+            </p>
+            <audio controls style="width: 100%;">
+                <source src="{{ music.audio.url }}" type="audio/mpeg">
+                Brauzeringiz audio pleerni qo‘llab-quvvatlamaydi.
+            </audio>
+        </div>
+    {% endif %}
+</div>
+
 
         <button type="submit" class="btn btn-primary">Saqlash</button>
     </form>

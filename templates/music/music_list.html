@@ -27,14 +27,14 @@
                 <td>{{ music.text|truncatechars:50 }}</td>
                 <td>{{ music.published_year }}</td>
                 <td>
-                    {% if music.audio %}
-                        <audio controls style="width: 150px;">
-                            <source src="{{ music.audio.url }}" type="audio/mpeg">
-                            Brauzeringiz audio pleerni qo‘llab-quvvatlamaydi.
-                        </audio>
-                    {% else %}
-                        <span class="text-muted">Audio mavjud emas</span>
-                    {% endif %}
+                   {% if music.audio_url %}
+    <audio controls style="width: 150px;">
+        <source src="{{ music.audio_url }}" type="audio/mpeg">
+        Brauzeringiz audio pleerni qo‘llab-quvvatlamaydi.
+    </audio>
+{% else %}
+    <span class="text-muted">Audio mavjud emas</span>
+{% endif %}
                 </td>
                 <td>
                     <a class="btn btn-sm btn-outline-primary" href="{% url 'music_detail' music.pk %}">🔍 Batafsil</a>

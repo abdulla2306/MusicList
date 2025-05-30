@@ -24,11 +24,12 @@
                 <td>{{ author.full_name }}</td>
                 <td>{{ author.birthday }}</td>
                 <td>
-                    {% if author.image %}
-                        <img src="{{ author.image.url }}" width="100" alt="Rasm">
-                    {% else %}
-                        <span>Rasm mavjud emas</span>
-                    {% endif %}
+                   {% if author.image_url %}
+    <img src="{{ author.image_url }}" width="100" alt="Rasm">
+{% else %}
+    <span>Rasm mavjud emas</span>
+{% endif %}
+
                 </td>
                 <td>{{ author.country }}</td>
                 <td>
